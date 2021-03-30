@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<tr th:fragment="listRow(label,list)">
+    <th th:text="${label}">Telefonnummern</th>
+    <td>
+        <ul>
+            <li th:each="entry : ${list}"
+                th:text="${entry}">
+                112
+            </li>
+        </ul>
+    </td>
+</tr>
+</html>

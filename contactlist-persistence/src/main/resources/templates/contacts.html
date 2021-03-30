@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/page::html(~{::title},~{::main})">
+<title>Contact List – Contacts</title>
+<main id="contacts" th:with="search=${#request.getParameter('search')}">
+    <nav th:unless="${contactList.isEmpty}">
+        <ul th:with="suffix=${search != null ? '?search=' + search : ''}" class="plain">
+            <li th:each="entry : ${contactList}">
+                <a th:href="@{'/contacts/' + ${entry.id} + ${suffix}}"
+                   th:class="|contact-link ${contact?.id == entry.id ? 'active' : ''}|"
+                   th:text="${entry.name}">First Last</a>
+            </li>
+        </ul>
+    </nav>
+    <div>
+        <div id="contact-search">
+            <form method="get" action="/contacts">
+                <input type="text" placeholder="Search contacts" name="search"
+                       th:value="${#request.getParameter('search')}" required minlength="3">
+                <input type="submit" value="Search">
+                <a th:if="${search != null}" class="button clear" th:href="@{${#request.servletPath}}">Clear</a>
+            </form>
+        </div>
+        <div class="error" th:if="${contact == null && errorMessage != null}"
+             id="contact-error" th:text="${errorMessage}">
+            Error
+        </div>
+        <div class="info"  th:if="${contact == null && errorMessage == null && search != null}" id="contacts-found-msg">
+            <span th:text="${contactList.size}">10</span> contacts found
+        </div>
+        <div class="info" th:if="${contact == null && errorMessage == null && search == null}" id="select-contact-msg">
+            Select a contact on the left
+        </div>
+        <div th:if="${contact != null}">
+            <table id="contact-details">
+                <tr th:replace="fragments/contacts::textRow('First name','first-name',${contact.firstName},${search})"></tr>
+                <tr th:replace="fragments/contacts::textRow('Last name','last-name',${contact.lastName},${search})"></tr>
+                <tr th:replace="fragments/contacts::listRow('Email addresses','email',${contact.email},${search})"></tr>
+                <tr th:replace="fragments/contacts::listRow('Phone numbers','phone',${contact.phone},${search})"></tr>
+                <tr th:replace="fragments/contacts::textRow('Job title','job-title',${contact.jobTitle},${search})"></tr>
+                <tr th:replace="fragments/contacts::textRow('Company','company',${contact.company},${search})"></tr>
+            </table>
+        </div>
+    </div>
+</main>
+</html>
