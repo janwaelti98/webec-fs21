@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="html(title,content)">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../../../../length-converter/src/main/resources/static/style.css" th:href="@{/style.css}">
+    <title th:replace="${title}">Title</title>
+</head>
+<div id="container">
+    <header>
+        <h1>Contact List</h1>
+        <nav>
+            <ul>
+                <li><a href="/" th:class="${#request.servletPath == '/' ? 'active' : ''}">Home</a></li>
+                <li><a href="/contacts" th:class="${#request.servletPath.startsWith('/contacts') ? 'active' : ''}">Contacts</a></li>
+                <li><a href="/about" th:class="${#request.servletPath == '/about' ? 'active' : ''}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main th:replace="${content}">
+        <p>Content</p>
+    </main>
+    <footer>
+        built with <a href="https://spring.io/">Spring</a>
+    </footer>
+</div>
+</html>

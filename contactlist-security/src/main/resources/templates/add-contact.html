@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/page::html(~{::title},~{::main})">
+<title>Contact List – Add Contact</title>
+<main>
+    <h1>Add Contact</h1>
+    <form th:action="@{add}" method="post">
+        <div class="grid-form">
+            <label for="first-name" class="padded-label">First name:</label>
+            <input type="text" name="firstName" id="first-name"
+                   required pattern=".*\S.*" title="First name must not be empty">
+            <label for="last-name" class="padded-label">Last name:</label>
+            <input type="text" name="lastName" id="last-name"
+                   required pattern=".*\S.*" title="Last name must not be empty">
+            <label for="job-title" class="padded-label">Job title:</label>
+            <input type="text" name="jobTitle" id="job-title">
+            <label for="company" class="padded-label">Company:</label>
+            <input type="text" name="company" id="company">
+        </div>
+        <p>
+            <input type="submit" value="Add">
+        </p>
+    </form>
+</main>
+</html>

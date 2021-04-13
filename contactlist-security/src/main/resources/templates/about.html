@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/page::html(~{::title},~{::main})">
+<title>Contacts – About</title>
+<main>
+    <h1>About</h1>
+    <p>
+        The Contact List App is an example web app for the <em>Web Engineering</em> course
+        at the <a href="https://www.fhnw.ch/de/studium/technik">Hochschule für Technik FHNW</a>.
+    </p>
+    <h2>Stats</h2>
+    <table>
+        <tr>
+            <td>Contacts</td>
+            <td id="contact-count" th:text="${contactCount}">0</td>
+        </tr>
+        <tr>
+            <td>Phone numbers</td>
+            <td id="phone-number-count" th:text="${phoneNumberCount}">0</td>
+        </tr>
+        <tr>
+            <td>Email addresses</td>
+            <td id="email-count" th:text="${emailCount}">0</td>
+        </tr>
+    </table>
+</main>
+</html>
