@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/page::html(~{::title},~{::main})">
+<title>Contacts – Login</title>
+<main>
+    <form th:action="@{/login}" method="post">
+        <div class="grid-form">
+            <label for="username" class="padded-label">Username:</label>
+            <input type="text" name="username" id="username" required>
+            <label for="password" class="padded-label">Password:</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <p>
+            <input type="submit" value="Log in">
+        </p>
+    </form>
+</main>
+</html>

@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<title>Contacts Fragments</title>
+<table>
+
+    <tr th:fragment="textRow(name,id,value,search)" th:if="${value != null}">
+        <th th:text="${name}">
+            First name
+        </th>
+        <td th:utext="${#strings.escapeXml(value).replaceAll('(?i)\Q' + search + '\E', '<span class=''hi''>$0</span>')}"
+            th:id="|${id}-value|">
+            Fritz
+        </td>
+    </tr>
+
+    <tr th:fragment="listRow(name,id,list,search)" th:if="${!list.isEmpty}">
+        <th th:text="${name}">
+            Email addresses
+        </th>
+        <td th:id="|${id}-value|">
+            <ul class="plain">
+                <li th:each="elem : ${list}"
+                    th:utext="${#strings.escapeXml(elem).replaceAll('(?i)\Q' + search + '\E','<span class=''hi''>$0</span>')}">
+                    mail@example.com
+                </li>
+            </ul>
+        </td>
+    </tr>
+
+</table>
+</html>
