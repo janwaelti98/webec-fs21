@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/page::html(~{::title},~{::main})">
+<title>Contact List – Add Contact</title>
+<main>
+    <h1>Edit Contact</h1>
+    <form th:action="@{edit}" method="post">
+        <div class="grid-form">
+            <label for="first-name" class="padded-label">First name:</label>
+            <input type="text" name="firstName" id="first-name"
+                   required pattern=".*\S.*" title="First name must not be empty"
+                   th:value="${contact.firstName}">
+            <label for="last-name" class="padded-label">Last name:</label>
+            <input type="text" name="lastName" id="last-name"
+                   required pattern=".*\S.*" title="Last name must not be empty"
+                   th:value="${contact.lastName}">
+            <span class="padded-label">
+                Email addresses:
+            </span>
+            <ul class="plain">
+                <li th:each="email,iter : ${contact.email}">
+                    <span th:text="${email}" class="padded-item">Email address</span>
+                    <input type="checkbox" th:name="|deleteEmail${iter.index}|" th:id="|del-email-${iter.index}|">
+                    <label th:for="|del-email-${iter.index}|">Delete</label>
+                </li>
+                <li>
+                    <input type="email" name="addEmail" placeholder="Add email address">
+                </li>
+            </ul>
+            <span class="padded-label">
+                Phone numbers:
+            </span>
+            <ul class="plain">
+                <li th:each="phone,iter : ${contact.phone}">
+                    <span th:text="${phone}" class="padded-item">Phone number</span>
+                    <input type="checkbox" th:name="|deletePhone${iter.index}|" th:id="|del-phone-${iter.index}|">
+                    <label th:for="|del-phone-${iter.index}|">Delete</label>
+                </li>
+                <li>
+                    <input type="text" name="addPhone" placeholder="Add phone number">
+                </li>
+            </ul>
+            <label for="job-title" class="padded-label">Job title:</label>
+            <input type="text" name="jobTitle" id="job-title"
+                   th:value="${contact.jobTitle}">
+            <label for="company" class="padded-label">Company:</label>
+            <input type="text" name="company" id="company"
+                   th:value="${contact.company}">
+        </div>
+        <p>
+            <input type="submit" value="Save">
+            <a th:href="@{'/contacts/' + ${contact.id}}"
+               class="button secondary">Cancel</a>
+        </p>
+    </form>
+</main>
+</html>
